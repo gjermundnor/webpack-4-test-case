@@ -7,6 +7,7 @@ module.exports = {
         filename: 'bundle.js', // main.js is default filename
         path: path.resolve(__dirname, 'dist') // dist is default folder
     },
+    devtool: "source-map", 
     module: {
         rules: [
             {
@@ -24,6 +25,22 @@ module.exports = {
                         options: { minimize: true }
                     }
                 ]
+            },
+            {
+                test: /\.scss$/,
+                use: [{
+                    loader: "style-loader" // creates style nodes from JS strings 
+                }, {
+                    loader: "css-loader", // translates CSS into CommonJS
+                    options: {
+                        sourceMap: true
+                    }
+                }, {
+                    loader: "sass-loader", // compiles Sass to CSS
+                    options: {
+                        sourceMap: true
+                    }
+                }]
             }
         ]
     }, // END module
